@@ -1,0 +1,2 @@
+0,eggs,free chicken,6.0,grocery
+1,milk,free cows,10.0,grocery
