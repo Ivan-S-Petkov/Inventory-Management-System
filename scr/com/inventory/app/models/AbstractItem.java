@@ -1,19 +1,32 @@
-package com.inventory.app;
+package com.inventory.app.models;
 
 public abstract class AbstractItem {
 
-    public abstract double getQuantity();
+    protected String name;
+    protected String description;
 
-    public abstract void setQuantity(double quantity);
+    protected AbstractItem(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
-    public abstract String getName();
+    public String getName() {
+        return name;
+    }
 
-    public abstract void setName(String name);
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public abstract String getDescription();
+    public String getDescription() {
+        return description;
+    }
 
-    public abstract void setDescription(String description);
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public abstract String writeData();
+    public abstract String toString();
+
 
 }
