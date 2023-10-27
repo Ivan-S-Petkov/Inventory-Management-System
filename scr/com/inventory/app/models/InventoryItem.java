@@ -1,56 +1,39 @@
-package com.inventory.app;
+package com.inventory.app.models;
+
+import com.inventory.app.services.Item;
+import com.inventory.app.services.ItemService;
 
 public class InventoryItem extends AbstractItem implements Categorizable {
-    private final int ID;
-    private double quantity;
-    private String name;
-    private String description;
-    private String type;
+    protected final int ID;
+    protected double quantity;
 
-    private String category;
+    protected final String type;
+    protected String category;
+    protected double price;
 
-    public InventoryItem(int id, double quantity, String name, String description, String type) {
-        ID = id;
+    protected InventoryItem(String name, String description, int id, double quantity, String type, String category, double price) {
+        super(name, description);
+        this.ID = id;
         this.quantity = quantity;
-        this.name = name;
-        this.description = description;
         this.type = type;
-        this.category = "";
+        this.category = category;
+        this.price = price;
     }
 
-    @Override
+    public int getID() {
+        return ID;
+    }
+
     public double getQuantity() {
         return quantity;
     }
 
-    @Override
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String writeData() {
-        return String.join(",", String.valueOf(ID), name, description, String.valueOf(quantity), type);
+    public String getType() {
+        return type;
     }
 
     @Override
@@ -60,7 +43,12 @@ public class InventoryItem extends AbstractItem implements Categorizable {
 
     @Override
     public String getCategory() {
-        return category;
+        return this.category;
     }
 
+
+    @Override
+    public String toString() {
+        return String.join(",", String.valueOf(ID), name, description, String.valueOf(quantity), type, category, String.valueOf(price));
+    }
 }
