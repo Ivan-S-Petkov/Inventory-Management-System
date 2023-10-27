@@ -1,4 +1,4 @@
-package com.inventory.app;
+package com.inventory.app.models.itemTypes;
 
 public interface Breakable {
     public boolean isBreakable();

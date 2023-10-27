@@ -1,4 +1,6 @@
-package com.inventory.app;
+package com.inventory.app.services;
+
+import com.inventory.app.models.Inventory;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.inventory.app;
+package com.inventory.app.models.itemTypes;
 
 public interface Sellable {
     public void setPrice();

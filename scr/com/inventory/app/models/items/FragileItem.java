@@ -1,8 +1,6 @@
-package com.inventory.app.itemTypes;
+package com.inventory.app.models.itemTypes;
 
-import com.inventory.app.Breakable;
-import com.inventory.app.InventoryItem;
-import com.inventory.app.Sellable;
+import com.inventory.app.models.InventoryItem;
 
 public class FragileItem extends InventoryItem implements Sellable, Breakable {
 

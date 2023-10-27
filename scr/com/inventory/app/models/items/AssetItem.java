@@ -1,7 +1,6 @@
-package com.inventory.app.itemTypes;
+package com.inventory.app.models.itemTypes;
 
-import com.inventory.app.Breakable;
-import com.inventory.app.InventoryItem;
+import com.inventory.app.models.InventoryItem;
 
 public class AssetItem extends InventoryItem implements Breakable {
 

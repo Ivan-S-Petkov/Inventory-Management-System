@@ -1,4 +1,4 @@
-package com.inventory.app;
+package com.inventory.app.models;
 
 import java.util.Scanner;
 

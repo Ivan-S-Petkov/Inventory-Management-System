@@ -1,4 +1,7 @@
-package com.inventory.app;
+package com.inventory.app.services;
+
+import com.inventory.app.models.Inventory;
+import com.inventory.app.models.InventoryItem;
 
 import java.io.FileReader;
 import java.io.FileWriter;
