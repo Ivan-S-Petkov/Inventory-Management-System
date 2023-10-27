@@ -1,34 +1,36 @@
 package com.inventory.app;
 
+import com.inventory.app.models.Inventory;
+
 import java.util.Scanner;
 
-import static com.inventory.app.File.*;
-import static com.inventory.app.Menu.*;
+import static com.inventory.app.services.FileService.*;
+import static com.inventory.app.services.InventoryService.*;
+import static com.inventory.app.services.MenuService.*;
 
 public class Main {
     public static void main(String[] arr) {
         Scanner sc = new Scanner(System.in);
         Inventory inventory = new Inventory();
         readFile(inventory);
-        Validation validation = new Validation();
         showMenu();
         while (sc.hasNext()) {
             String command = sc.nextLine();
             switch (command) {
                 case "add":
-                    String[] addValues = getAddValues();
-                    String name = addValues[0];
-                    String description = addValues[1];
-                    String quantity = addValues[2];
-                    String type = addValues[3];
-                    if (validation.validateAddInputs(inventory, name, description, quantity, type)) {
-                        inventory.add(name, description, Double.parseDouble(quantity), type);
-                        writeFile(inventory);
-                        System.out.println("Product added successfully!");
-                    }
+                    // Reading console input
+                    String name = getName(inventory, sc);
+                    String description = getDescription(sc);
+                    double quantity = getQuantity(sc);
+                    String type = getType(sc);
+                    String category = getCategory(sc);
+
+                    addInventory(inventory, name, description, quantity, type, category,0);
+                    writeFile(inventory);
+                    System.out.println("Product added successfully!");
                     break;
                 case "list":
-                    inventory.lsitAllItems();
+                    listInventoryItems(inventory);
                     break;
                 case "categorize":
                     break;
