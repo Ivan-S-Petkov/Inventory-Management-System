@@ -1,12 +1,12 @@
-package com.inventory.app.models.itemTypes;
+package com.inventory.app.models.items;
 
 import com.inventory.app.models.InventoryItem;
 
 public class AssetItem extends InventoryItem implements Breakable {
 
 
-    public AssetItem(int id, double quantity, String name, String description, String type) {
-        super(id, quantity, name, description, type);
+    public AssetItem(int id, String name, String description, double quantity, String type, String category, double price) {
+        super(name, description, id, quantity, type, category, price);
     }
 
     @Override
