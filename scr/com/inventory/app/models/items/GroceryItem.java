@@ -1,13 +1,14 @@
-package com.inventory.app.models.itemTypes;
+package com.inventory.app.models.items;
 
 import com.inventory.app.models.InventoryItem;
 
 public class GroceryItem extends InventoryItem implements Perishable, Sellable {
 
 
-    public GroceryItem(int id, double quantity, String name, String description, String type) {
-        super(id, quantity, name, description, type);
+    public GroceryItem(int id, String name, String description,  double quantity, String type, String category, double price) {
+        super(name, description, id, quantity, type, category, price);
     }
+
 
     @Override
     public boolean isPerishable() {
@@ -20,12 +21,17 @@ public class GroceryItem extends InventoryItem implements Perishable, Sellable {
     }
 
     @Override
-    public void setPrice() {
-
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override
-    public void getPrice() {
+    public double getPrice() {
+        return price;
+    }
 
+    @Override
+    public double calculateValue() {
+        return quantity * price;
     }
 }
