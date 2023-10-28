@@ -1,27 +1,61 @@
-package com.inventory.app.models;
+package com.inventory.app.services;
+
+import com.inventory.app.models.Inventory;
 
 import java.util.Scanner;
 
-public class Menu {
+import static com.inventory.app.services.ValidationService.*;
 
-    public static void showMenu(){
+public class MenuService {
+
+    public static void showMenu() {
         System.out.println("Available commands:");
-        System.out.println(" * add");
-        System.out.println(" * list");
-        System.out.println(" * categorize");
-        System.out.println(" * order");
+        System.out.println(" - add");
+        System.out.println(" - list");
+        System.out.println(" - categorize");
+        System.out.println(" - order");
     }
 
-    public static String[] getAddValues(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Specify product name");
+    public static String getName(Inventory inventory, Scanner sc) {
+        System.out.print("Specify product name: ");
         String name = sc.nextLine();
-        System.out.println("Specify product description");
-        String description = sc.nextLine();
-        System.out.println("Specify product quantity");
-        String quantity = sc.nextLine();
-        System.out.println("Specify product type");
-        String type = sc.nextLine();
-        return new String[]{name, description, quantity, type};
+        while (!validateName(inventory, name)) {
+            name = sc.nextLine();
+        }
+        return name;
     }
+
+    public static String getDescription(Scanner sc) {
+        System.out.print("Specify product description: ");
+        String description = sc.nextLine();
+        // Description is redundant but left in case future validation should be implemented
+        return description;
+    }
+
+    public static double getQuantity(Scanner sc) {
+        System.out.print("Specify product quantity: ");
+        String quantity = sc.nextLine();
+        while (!validateQuantity(quantity)) {
+            quantity = sc.nextLine();
+        }
+        return Double.parseDouble(quantity);
+    }
+
+    public static String getType(Scanner sc) {
+        System.out.print("Specify product type: ");
+        String type = sc.nextLine();
+        while (!validateType(type)) {
+            type = sc.nextLine();
+        }
+        return type;
+    }
+
+    public static String getCategory(Scanner sc){
+        System.out.print("Specify product category: ");
+        String category = sc.nextLine();
+        // Category is redundant but left in case future validation should be implemented
+        return category;
+    }
+
+
 }
