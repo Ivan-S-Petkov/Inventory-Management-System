@@ -9,7 +9,9 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
-public class File {
+import static com.inventory.app.services.InventoryService.addInventory;
+
+public class FileService {
     private static final String dataFile = "inventory.txt";
 
     public static void readFile(Inventory inventory) {
@@ -22,7 +24,9 @@ public class File {
                 String description = row[2];
                 double quantity = Double.parseDouble(row[3]);
                 String type = row[4];
-                inventory.add(name,description,quantity,type);
+                String category = row[5];
+                double price = Double.parseDouble(row[6]);
+                addInventory(inventory, name,description,quantity,type, category, price);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -32,7 +36,7 @@ public class File {
     public static void writeFile(Inventory inventory) {
         try (FileWriter fw = new FileWriter(dataFile)) {
             for (InventoryItem inventoryItem : inventory.getInventory()) {
-                fw.write(inventoryItem.writeData().concat("\r\n"));
+                fw.write(inventoryItem.toString().concat("\r\n"));
             }
         } catch (
                 IOException e) {
