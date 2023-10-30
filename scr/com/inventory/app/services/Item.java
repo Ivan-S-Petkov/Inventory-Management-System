@@ -1,9 +1,10 @@
-package com.inventory.app.models;
+package com.inventory.app.services;
+
+import com.inventory.app.models.InventoryItem;
 
 public interface Item {
-    public String toString();
-    public void getItemDetails();
-    public double calculateValue();
-    public void showItemDescription();
+    void getDetails(InventoryItem item);
+
+    String showDescription(InventoryItem item);
 
 }

@@ -1,8 +1,5 @@
 package com.inventory.app.models;
 
-import com.inventory.app.services.Item;
-import com.inventory.app.services.ItemService;
-
 public class InventoryItem extends AbstractItem implements Categorizable {
     protected final int ID;
     protected double quantity;

@@ -1,4 +1,4 @@
-package com.inventory.app.models.items;
+package com.inventory.app.models;
 
 public interface Categorizable {
     public void setCategory(String category);

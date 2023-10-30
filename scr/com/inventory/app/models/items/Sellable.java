@@ -1,6 +1,9 @@
-package com.inventory.app.models.itemTypes;
+package com.inventory.app.models.items;
 
 public interface Sellable {
-    public void setPrice();
-    public void getPrice();
+    void setPrice(double price);
+
+    double getPrice();
+
+    double calculateValue();
 }
