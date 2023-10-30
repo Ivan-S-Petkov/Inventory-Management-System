@@ -16,6 +16,6 @@ public class AssetItem extends InventoryItem implements Breakable {
 
     @Override
     public void handleBreak() {
-
+        System.out.println("The asset has broke down! Please inform accounting department.");
     }
 }

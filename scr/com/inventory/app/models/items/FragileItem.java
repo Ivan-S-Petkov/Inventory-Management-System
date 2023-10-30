@@ -5,7 +5,7 @@ import com.inventory.app.models.InventoryItem;
 public class FragileItem extends InventoryItem implements Sellable, Breakable {
 
 
-    public FragileItem(int id, String name, String description,  double quantity, String type, String category, double price) {
+    public FragileItem(int id, String name, String description, double quantity, String type, String category, double price) {
         super(name, description, id, quantity, type, category, price);
     }
 
@@ -16,7 +16,8 @@ public class FragileItem extends InventoryItem implements Sellable, Breakable {
 
     @Override
     public void handleBreak() {
-
+        // Increase price once an item broke
+        price = price + (2 * price) / quantity;
     }
 
 

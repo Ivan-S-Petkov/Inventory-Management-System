@@ -16,7 +16,8 @@ public class ElectronicItem extends InventoryItem implements Breakable, Sellable
 
     @Override
     public void handleBreak() {
-
+        // Increase price once an item broke
+        price = price + price / quantity;
     }
 
     @Override
