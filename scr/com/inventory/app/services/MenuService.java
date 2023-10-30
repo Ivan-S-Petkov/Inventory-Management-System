@@ -1,6 +1,8 @@
 package com.inventory.app.services;
 
 import com.inventory.app.models.Inventory;
+import com.inventory.app.models.user.User;
+import com.inventory.app.models.user.Users;
 
 import java.util.Scanner;
 
@@ -8,12 +10,22 @@ import static com.inventory.app.services.ValidationService.*;
 
 public class MenuService {
 
-    public static void showMenu() {
+    public static void showMenu(User user) {
         System.out.println("Available commands:");
-        System.out.println(" - add");
-        System.out.println(" - list");
-        System.out.println(" - categorize");
-        System.out.println(" - order");
+        System.out.println("  menu");
+        if (!UserService.isLogged(user)) {
+            System.out.println("  login");
+            System.out.println("  register");
+        }
+        if (UserService.isLogged(user)) {
+            System.out.println("  list");
+            if (UserService.isAdmin(user)) {
+                System.out.println("  add");
+                System.out.println("  categorize");
+            }
+            System.out.println("  order");
+            System.out.println("  logout");
+        }
     }
 
     public static String getName(Inventory inventory, Scanner sc) {
@@ -50,11 +62,33 @@ public class MenuService {
         return type;
     }
 
-    public static String getCategory(Scanner sc){
+    public static String getCategory(Scanner sc) {
         System.out.print("Specify product category: ");
         String category = sc.nextLine();
         // Category is redundant but left in case future validation should be implemented
         return category;
+    }
+
+    public static String getUsername(Scanner sc, Users users, String command) {
+        System.out.print("Username: ");
+        String username = sc.nextLine();
+        while (!validateUsername(users, username, command)) {
+            username = sc.nextLine();
+        }
+        return username;
+    }
+
+    public static String getPassword(Scanner sc, String command, String... repeat) {
+        if (repeat.length > 0) {
+            System.out.print("Repeat password: ");
+        } else {
+            System.out.print("Password: ");
+        }
+        String password = sc.nextLine();
+        while (!validatePassword(command, password)) {
+            password = sc.nextLine();
+        }
+        return password;
     }
 
 
