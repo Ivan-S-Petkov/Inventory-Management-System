@@ -17,7 +17,7 @@ public class GroceryItem extends InventoryItem implements Perishable, Sellable {
 
     @Override
     public void handleExpiration() {
-
+        System.out.printf("The out of date grocery has been removed from the shelf.");
     }
 
     @Override
