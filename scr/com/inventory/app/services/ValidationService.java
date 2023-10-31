@@ -1,6 +1,8 @@
 package com.inventory.app.services;
 
 import com.inventory.app.models.Inventory;
+import com.inventory.app.models.InventoryItem;
+import com.inventory.app.models.user.User;
 import com.inventory.app.models.user.Users;
 
 import javax.sound.midi.Soundbank;
@@ -30,7 +32,7 @@ public class ValidationService {
                 return false;
             }
         } else {
-            if(inventory.getInventory().isEmpty() || inventory.getInventory().stream().noneMatch(inventoryItem -> inventoryItem.getName().contains(name))){
+            if (inventory.getInventory().isEmpty() || inventory.getInventory().stream().noneMatch(inventoryItem -> inventoryItem.getName().contains(name))) {
                 System.out.println("Name does not exist!");
                 System.out.print("Please type the name again: ");
                 return false;
@@ -116,6 +118,17 @@ public class ValidationService {
 
     private static boolean checkCategory(String category) {
         return !category.isEmpty();
+    }
+
+    public static boolean validateAvailableQuantity(InventoryItem item, double quantity) {
+        return item.getQuantity() >= quantity;
+    }
+
+    public static boolean validateCartItemExist(User user, String name) {
+        for (InventoryItem item : user.getCart()) {
+            return item.getName().contains(name);
+        }
+        return false;
     }
 
 }

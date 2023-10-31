@@ -17,6 +17,15 @@ public class InventoryItem extends AbstractItem implements Categorizable {
         this.price = price;
     }
 
+    public InventoryItem(InventoryItem item){
+        super(item.name, item.description);
+        this.ID = item.ID;
+        this.quantity = item.quantity;
+        this.type = item.type;
+        this.category = item.category;
+        this.price = item.price;
+    }
+
     public int getID() {
         return ID;
     }

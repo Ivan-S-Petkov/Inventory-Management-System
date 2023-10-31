@@ -23,6 +23,7 @@ public class MenuService {
                 System.out.println("  add");
                 System.out.println("  categorize");
             }
+            System.out.println("  cart");
             System.out.println("  order");
             System.out.println("  logout");
         }
@@ -91,5 +92,10 @@ public class MenuService {
         return password;
     }
 
-
+    public static void showCartMenu(){
+        System.out.println("Possible cart actions:");
+        System.out.println("  add");
+        System.out.println("  remove");
+        System.out.println("  view");
+    }
 }
