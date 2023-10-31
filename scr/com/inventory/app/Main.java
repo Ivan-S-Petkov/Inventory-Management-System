@@ -7,6 +7,8 @@ import com.inventory.app.models.user.Users;
 import com.inventory.app.services.FileService;
 import com.inventory.app.services.UserService;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Scanner;
 
 import static com.inventory.app.services.FileService.*;
@@ -15,7 +17,7 @@ import static com.inventory.app.services.MenuService.*;
 import static com.inventory.app.services.ValidationService.validatePasswordMatch;
 
 public class Main {
-    public static void main(String[] arr) {
+    public static void main(String[] arr) throws NoSuchAlgorithmException, InvalidKeySpecException {
         Scanner sc = new Scanner(System.in);
         Users users = new Users();
         FileService.readUsersFile(users);
