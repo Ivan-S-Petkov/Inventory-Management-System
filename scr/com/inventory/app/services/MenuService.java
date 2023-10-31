@@ -28,10 +28,10 @@ public class MenuService {
         }
     }
 
-    public static String getName(Inventory inventory, Scanner sc) {
+    public static String getName(Inventory inventory, Scanner sc, String... edit) {
         System.out.print("Specify product name: ");
         String name = sc.nextLine();
-        while (!validateName(inventory, name)) {
+        while (!validateName(inventory, name, edit)) {
             name = sc.nextLine();
         }
         return name;

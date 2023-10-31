@@ -1,6 +1,7 @@
 package com.inventory.app;
 
 import com.inventory.app.models.Inventory;
+import com.inventory.app.models.InventoryItem;
 import com.inventory.app.models.user.Roles;
 import com.inventory.app.models.user.User;
 import com.inventory.app.models.user.Users;
@@ -47,6 +48,12 @@ public class Main {
                     listInventoryItems(inventory);
                     break;
                 case "categorize":
+                    name = getName(inventory, sc, "edit");
+                    category = getCategory(sc);
+                    InventoryItem item = getInventoryItemByName(inventory, name);
+                    item.setCategory(category);
+                    writeDataFile(inventory);
+                    System.out.println("Product category edited successfully!");
                     break;
                 case "order":
                     break;

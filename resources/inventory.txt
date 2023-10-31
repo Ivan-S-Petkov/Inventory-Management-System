@@ -1,4 +1,4 @@
-0,eggs,,6.0,grocery,,0.0
+0,eggs,,6.0,grocery,not vegan,0.0
 1,milk,free cows,3.0,grocery,,0.0
 2,cheese,from free goats,15.0,grocery,,0.0
 3,pizza,italian style,1.0,grocery,,0.0

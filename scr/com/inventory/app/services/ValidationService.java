@@ -14,20 +14,29 @@ public class ValidationService {
     private static final List<String> types = new ArrayList<>(Arrays.stream(new String[]{"electronic", "fragile", "grocery", "asset"}).toList());
 
 
-    static boolean validateName(Inventory inventory, String name) {
+    static boolean validateName(Inventory inventory, String name, String... edit) {
         if (name.isEmpty()) {
             System.out.println("The name is empty!");
             System.out.print("Please type the name again: ");
             return false;
         }
-        //Check if name already exists
-        if (inventory.getInventory().isEmpty() || inventory.getInventory().stream().noneMatch(inventoryItem -> inventoryItem.getName().contains(name))) {
-            return true;
+        if (edit.length == 0) {
+            //Check if name already exists
+            if (inventory.getInventory().isEmpty() || inventory.getInventory().stream().noneMatch(inventoryItem -> inventoryItem.getName().contains(name))) {
+                return true;
+            } else {
+                System.out.println("Name already exist!");
+                System.out.print("Please type the name again: ");
+                return false;
+            }
         } else {
-            System.out.println("Name already exist!");
-            System.out.print("Please type the name again: ");
-            return false;
+            if(inventory.getInventory().isEmpty() || inventory.getInventory().stream().noneMatch(inventoryItem -> inventoryItem.getName().contains(name))){
+                System.out.println("Name does not exist!");
+                System.out.print("Please type the name again: ");
+                return false;
+            }
         }
+        return true;
     }
 
 
@@ -70,7 +79,7 @@ public class ValidationService {
             return false;
         }
         // Check if username already exits only if user is trying to register
-        if(command.contains("register")) {
+        if (command.contains("register")) {
             if (users.getUsers().isEmpty() || users.getUsers().stream().noneMatch(user -> user.getUsername().contains(username))) {
                 return true;
             } else {
@@ -88,7 +97,7 @@ public class ValidationService {
             System.out.print("Please type your password again: ");
             return false;
         }
-        if(command.contains("register")) {
+        if (command.contains("register")) {
             // Check if password contains at least one digit
             if (password.matches(".*\\d.*")) {
                 return true;
@@ -98,10 +107,10 @@ public class ValidationService {
                 return false;
             }
         }
-        return  true;
+        return true;
     }
 
-    public static boolean validatePasswordMatch(String password, String rePassword){
+    public static boolean validatePasswordMatch(String password, String rePassword) {
         return Objects.equals(password, rePassword);
     }
 
