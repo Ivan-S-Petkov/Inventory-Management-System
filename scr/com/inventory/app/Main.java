@@ -6,11 +6,12 @@ import com.inventory.app.models.user.User;
 import com.inventory.app.models.user.Users;
 import com.inventory.app.services.CartService;
 import com.inventory.app.services.FileService;
-import com.inventory.app.services.InventoryService;
+import com.inventory.app.services.OrderService;
 import com.inventory.app.services.UserService;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static com.inventory.app.services.FileService.*;
@@ -27,6 +28,7 @@ public class Main {
         Inventory inventory = new Inventory();
         readDataFile(inventory);
         showMenu(user);
+
         while (sc.hasNext()) {
             String command = sc.nextLine();
             switch (command) {
@@ -35,13 +37,16 @@ public class Main {
                     break;
                 case "add":
                     // Reading console input
-                    String name = getName(inventory, sc);
+                    String name = getName(inventory, sc, true, false);
                     String description = getDescription(sc);
                     double quantity = getQuantity(sc);
                     String type = getType(sc);
+                    double price = 0;
+                    if(!Objects.equals(type, "asset")){
+                        price = getPrice(sc);
+                    }
                     String category = getCategory(sc);
-
-                    addInventory(inventory, name, description, quantity, type, category, 0);
+                    addInventory(inventory, name, description, quantity, type, category, price);
                     writeDataFile(inventory);
                     System.out.println("Product added successfully!");
                     break;
@@ -49,7 +54,7 @@ public class Main {
                     listInventoryItems(inventory);
                     break;
                 case "categorize":
-                    name = getName(inventory, sc, "edit");
+                    name = getName(inventory, sc, true, true);
                     category = getCategory(sc);
                     InventoryItem item = getInventoryItemByName(inventory, name);
                     item.setCategory(category);
@@ -61,12 +66,12 @@ public class Main {
                     command = sc.nextLine();
                     switch (command) {
                         case "add":
-                            name = getName(inventory, sc, "add");
+                            name = getName(inventory, sc, true, true);
                             quantity = getQuantity(sc);
                             CartService.add(inventory, user,name, quantity);
                             break;
                         case "remove":
-                            name = getName(inventory, sc, "remove");
+                            name = getName(inventory, sc, true, true  );
                             CartService.remove(user, name);
                             break;
                         case "view":
@@ -78,6 +83,7 @@ public class Main {
                     }
                     break;
                 case "order":
+                    OrderService.order(user, inventory);
                     break;
                 case "login":
                     String username = getUsername(sc, users, "login");
