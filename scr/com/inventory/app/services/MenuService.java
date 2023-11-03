@@ -29,10 +29,10 @@ public class MenuService {
         }
     }
 
-    public static String getName(Inventory inventory, Scanner sc, String... edit) {
+    public static String getName(Inventory inventory, Scanner sc, boolean checkExisting, boolean getExisting) {
         System.out.print("Specify product name: ");
         String name = sc.nextLine();
-        while (!validateName(inventory, name, edit)) {
+        while (!validateName(inventory, name, checkExisting, getExisting)) {
             name = sc.nextLine();
         }
         return name;
@@ -70,6 +70,15 @@ public class MenuService {
         return category;
     }
 
+    public static double getPrice(Scanner sc) {
+        System.out.print("Specify product price: ");
+        String price = sc.nextLine();
+        while (!validatePrice(price)) {
+            price = sc.nextLine();
+        }
+        return Double.parseDouble(price);
+    }
+
     public static String getUsername(Scanner sc, Users users, String command) {
         System.out.print("Username: ");
         String username = sc.nextLine();
@@ -92,7 +101,7 @@ public class MenuService {
         return password;
     }
 
-    public static void showCartMenu(){
+    public static void showCartMenu() {
         System.out.println("Possible cart actions:");
         System.out.println("  add");
         System.out.println("  remove");
