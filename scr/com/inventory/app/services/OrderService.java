@@ -22,17 +22,20 @@ public class OrderService {
                     // Subtract inventory quantity
                     double newQuantity = inventoryItem.getQuantity() - item.getQuantity();
                     inventoryItem.setQuantity(newQuantity);
-                    // Add item to order and remove from cart
+                    // Add item to order
                     order.getItems().add(item);
-                    user.getCart().remove(item);
                 } else {
                     System.out.printf("Not enough quantity of %s! %n", item.getName());
                 }
             }
             // Update inventory file if order is placed
-            if(!order.getItems().isEmpty()) {
+            if (!order.getItems().isEmpty()) {
                 FileService.writeDataFile(inventory);
                 FileService.appendOrdersFile(order);
+                // Remove ordered items from the cart
+                for (InventoryItem item : order.getItems()) {
+                    user.getCart().remove(item);
+                }
             }
         } else {
             System.out.println("Cart is empty!");
