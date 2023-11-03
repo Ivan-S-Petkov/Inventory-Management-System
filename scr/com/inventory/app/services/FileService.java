@@ -2,13 +2,12 @@ package com.inventory.app.services;
 
 import com.inventory.app.models.Inventory;
 import com.inventory.app.models.InventoryItem;
+import com.inventory.app.models.Order;
 import com.inventory.app.models.user.Roles;
 import com.inventory.app.models.user.Users;
 import com.inventory.app.models.user.User;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 import java.util.*;
 
@@ -18,6 +17,7 @@ import static com.inventory.app.services.UsersService.addUser;
 public class FileService {
     private static final String dataFile = "inventory.txt";
     private static final String usersFile = "users.txt";
+    private static final String ordersFile = "orders.txt";
 
     public static void readDataFile(Inventory inventory) {
         try (FileReader fr = new FileReader(dataFile)) {
@@ -79,4 +79,15 @@ public class FileService {
     }
 
 
+    public static void appendOrdersFile(Order order) {
+        try (FileWriter fw = new FileWriter(ordersFile, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter pw = new PrintWriter(bw);
+        ) {
+            pw.println(order.toString());
+            System.out.println("Order placed successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
