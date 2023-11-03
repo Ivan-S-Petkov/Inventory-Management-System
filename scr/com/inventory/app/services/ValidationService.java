@@ -5,7 +5,6 @@ import com.inventory.app.models.InventoryItem;
 import com.inventory.app.models.user.User;
 import com.inventory.app.models.user.Users;
 
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,14 +15,14 @@ public class ValidationService {
     private static final List<String> types = new ArrayList<>(Arrays.stream(new String[]{"electronic", "fragile", "grocery", "asset"}).toList());
 
 
-    static boolean validateName(Inventory inventory, String name, String... edit) {
+    // Optional variable checkExisting is used to perform additional check
+    static boolean validateName(Inventory inventory, String name, boolean checkExisting, boolean getExisting) {
         if (name.isEmpty()) {
             System.out.println("The name is empty!");
             System.out.print("Please type the name again: ");
             return false;
         }
-        if (edit.length == 0) {
-            //Check if name already exists
+        if (checkExisting && !getExisting) {
             if (inventory.getInventory().isEmpty() || inventory.getInventory().stream().noneMatch(inventoryItem -> inventoryItem.getName().contains(name))) {
                 return true;
             } else {
@@ -31,13 +30,17 @@ public class ValidationService {
                 System.out.print("Please type the name again: ");
                 return false;
             }
-        } else {
+        }
+        if (checkExisting && getExisting) {
             if (inventory.getInventory().isEmpty() || inventory.getInventory().stream().noneMatch(inventoryItem -> inventoryItem.getName().contains(name))) {
                 System.out.println("Name does not exist!");
                 System.out.print("Please type the name again: ");
                 return false;
+            } else {
+                return true;
             }
         }
+
         return true;
     }
 
@@ -70,6 +73,23 @@ public class ValidationService {
         } catch (NumberFormatException e) {
             System.out.println("Quantity is not a number!");
             System.out.print("Please type the quantity again: ");
+            return false;
+        }
+    }
+
+    static boolean validatePrice(String price) {
+        try {
+            double number = Double.parseDouble(price);
+            if (number > 0) {
+                return true;
+            } else {
+                System.out.println("Price must be positive number!");
+                System.out.print("Please type the price again: ");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Price is not a number!");
+            System.out.print("Please type the price again: ");
             return false;
         }
     }
@@ -116,10 +136,6 @@ public class ValidationService {
         return Objects.equals(password, rePassword);
     }
 
-    private static boolean checkCategory(String category) {
-        return !category.isEmpty();
-    }
-
     public static boolean validateAvailableQuantity(InventoryItem item, double quantity) {
         return item.getQuantity() >= quantity;
     }
@@ -128,7 +144,7 @@ public class ValidationService {
         for (InventoryItem item : user.getCart()) {
             return item.getName().contains(name);
         }
+        System.out.println("This product is not in your cart!");
         return false;
     }
-
 }
