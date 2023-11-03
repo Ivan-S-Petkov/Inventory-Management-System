@@ -43,8 +43,11 @@ public class Order {
         StringBuilder itemsString = new StringBuilder();
         for (InventoryItem item : items) {
             itemsString.append(String.join(",", item.getName(), String.valueOf(item.getQuantity()), String.valueOf(item.price)));
+            // Add comma unless it is the final item
+            if(items.indexOf(item)<items.size()-1){
+                itemsString.append(",");
+            }
         }
-
         return String.join(",", user.getUsername(), String.valueOf(date), status, itemsString);
     }
 }
