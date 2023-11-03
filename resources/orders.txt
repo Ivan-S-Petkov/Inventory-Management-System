@@ -1,0 +1,6 @@
+
+admin,2023-11-03,PLACED,pasta,1.0,12.5
+admin,2023-11-03,PLACED,pizza,1.0,0.0
+admin,2023-11-03,PLACED,eggs,1.0,0.0
+null,2023-11-03,PLACED,eggs,10.0,1.0
+null,2023-11-03,PLACED,cheese,1.0,11.0,pasta,1.0,12.5

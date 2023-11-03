@@ -1,4 +1,8 @@
-0,eggs,,6.0,grocery,not vegan,0.0
-1,milk,free cows,3.0,grocery,,0.0
-2,cheese,from free goats,15.0,grocery,,0.0
-3,pizza,italian style,1.0,grocery,,0.0
+0,eggs,,0.0,grocery,categorize,1.0
+1,milk,free cows,3.0,grocery,,3.0
+2,cheese,from free goats,14.0,grocery,,11.0
+3,pizza,italian style,2.0,grocery,,11.0
+4,pasta,,1.0,grocery,food,12.5
+5,olives,from Greece,100.0,grocery,food,6.0
+6,laptop,HP,4.0,electronic,computers,1250.0
+7,test,asd,1.0,electronic,ops,1.0
